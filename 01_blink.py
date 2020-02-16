@@ -14,20 +14,26 @@ GPIO.setmode(GPIO.BCM)
 
 
 class LED:
-    state = False
-    def __init__(self,start_state,id_pin):
+    # state = False
+    
+    def __init__(self, start_state, id_pin):
         self.state = start_state
         self.pin = id_pin
+        GPIO.setup(self.pin, GPIO.OUT)
+    
+    def switch(self):
+        self.state = not self.state
+        GPIO.output(self.pin, self.state)
+            
         
 red_LED = LED(True,14)
 
-GPIO.setup(red_LED.pin, GPIO.OUT)
+
 
 try:         
     while True:
-        GPIO.output(red_LED.pin,red_LED.state)  # LED on
         time.sleep(0.5)# delay 0.5 seconds
-        red_LED.state = not red_LED.state   
+        red_LED.switch()   
 finally:  
     print("Cleaning up")
     GPIO.cleanup()
