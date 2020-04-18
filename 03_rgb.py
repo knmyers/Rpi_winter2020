@@ -16,11 +16,11 @@ GPIO.setup(16, GPIO.OUT)
 # control the brightness of the LEDs.
 # Follow this link for more info on PWM: http://en.wikipedia.org/wiki/Pulse-width_modulation
 class PWM:
-    def__init__(self,pin,start_state,maximum)
-        self.pin = id_pin
+    def__init__(self,pin,start_state,maximum):
+    self.pin = id_pin
         self.state = start_state
         self.max = maximum
-GPIO.setup(self.pin,GPIO.OUT)
+        GPIO.setup(self.pin,GPIO.OUT)
 
 RED_LED = PWM(14,100,500)
 GREEN_LED = PWM(15,100,500)
@@ -64,12 +64,9 @@ class App:
         scaleBlue.grid(row=2, column=1)
 
     # These methods called whenever a slider moves
-    class Update:
-        def__init__(self,color,duty):
+    def updateRGB(self,pwm,duty):
+        pwm.ChangeDutyCycle(float(duty))
 
-    RED_LED = Update(float)
-    GREEN_LED = Update(float)
-    RED_LED = Update(float)
 
    # def updateRed(self, duty):
         # change the led brightness to match the slider
