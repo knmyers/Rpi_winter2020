@@ -10,7 +10,7 @@ Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positi
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(14, GPIO.OUT)
 GPIO.setup(15, GPIO.OUT)
-GPIO.setup(16, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 # Start Pulse Width Modulation (PWM) on the red, green and blue channels to 
 # control the brightness of the LEDs.
