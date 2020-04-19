@@ -64,6 +64,7 @@ class App:
         frame = Frame(master)
         frame.pack()
         label = Label(frame, text='Light', font=("Helvetica", 32))
+
         label.grid(row=0)
         self.reading_label = Label(frame, text='12.34', font=("Helvetica", 110))
         self.reading_label.grid(row=1)

@@ -4,7 +4,7 @@
 from tkinter import *           # tkinter provides the graphical user interface (GUI)
 import RPi.GPIO as GPIO
 import time, math
-from thermometer_obj import thermometer
+from thermometer_obj import Thermometer
 
 
 C = 0.38 # uF - Tweek this value around 0.33 to improve accuracy
