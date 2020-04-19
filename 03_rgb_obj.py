@@ -8,7 +8,7 @@ import time
 
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
 GPIO.setmode(GPIO.BCM)
-"used a 'super' class to give my PWM class the same functions as the parent GPIO.PWM class)"
+#used a 'super' class to give my PWM class the same functions as the parent GPIO.PWM class)
 class PWM(GPIO.PWM):
     def __init__(self, id_pin, start_state, maximum, color):
         GPIO.setup(id_pin, GPIO.OUT)
