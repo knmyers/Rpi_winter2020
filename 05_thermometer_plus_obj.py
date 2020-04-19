@@ -96,7 +96,7 @@ def read_temp_c():
     t0 = 273.15     # 0 deg C in K
     t25 = t0 + 25.0 # 25 deg C in K
     # Steinhart-Hart equation - Google it
-    inv_T = 1/t25 + 1/B * math.log(R/R_0)
+    inv_T = 1/t25 + 1/B * math.log(R/float(R_0))
     T = (1/inv_T - t0)
     return T
 
