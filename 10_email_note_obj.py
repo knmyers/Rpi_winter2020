@@ -1,20 +1,22 @@
 # 10_email_notifier.py
-# From the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
+# adapted from the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
 # Based on Recipe 7.15 in The Raspberry Pi Cookbook by Simon Monk.
 
 import RPi.GPIO as GPIO
 import smtplib, time            # smtp - Simple Mail Transport Protocol - library for sending email
 
 SMTP_SERVER = 'smtp.gmail.com'
+"TLS"
 SMTP_PORT = 587
 
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
+#chose a blue LED because it makes me less anxious, you can change it to red
 GPIO.setmode(GPIO.BCM)
-red_pin = 17
+blue_pin = 17
 green_pin = 27
 switch_pin = 22
 
-GPIO.setup(red_pin, GPIO.OUT)
+GPIO.setup(blue_pin, GPIO.OUT)
 GPIO.setup(green_pin, GPIO.OUT)
 GPIO.setup(switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -32,18 +34,19 @@ def send_email(username, password, recipient, subject, text):
     smtpserver.sendmail(username, recipient, msg)
     smtpserver.close()
 
-# Utility function to turn the gree LED on and the red off
+# Utility function to turn the green LED on and the blue off
 #def green():
     #GPIO.output(green_pin, True)
-    #GPIO.output(red_pin, False)
+    #GPIO.output(blue_pin, False)
 
-# Utility function to turn the red LED on and the green off
+# Utility function to turn the blue LED on and the green off
 #def red():
     #GPIO.output(green_pin, False)
-    #GPIO.output(red_pin, True)
-    
+    #GPIO.output(blue_pin, True)
+
+#implemented the LED class from bink to control my LED pins"   
 class LED:
-    # state = False
+     #state = False
     
     def __init__(self, start_state, id_pin):
         self.state = start_state
@@ -54,16 +57,18 @@ class LED:
         self.state = not self.state
         GPIO.output(self.pin, self.state)
             
-        
-red_LED = LED(True,17)
-green_LED = LED(True,27)
+  #setting pins on the board      
+blue_LED = LED(False,17)
+green_LED = LED(False,22)
 
+#rewrote the utility function using my LED class
 def green():
-        red_LED.switch()
-def red():
+        blue_LED.switch()
+def blue():
         green_LED.switch()
 # Prompt the user to enter their email details
 # Should only have to do this once each time the program is started
+#had to update the code from python 2 to python3
 username = input("Sending gmail address? ")
 password = input("Sending gmail password? ")
 recipient = input("Send email to? ")
