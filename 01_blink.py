@@ -26,7 +26,7 @@ class LED:
         GPIO.output(self.pin, self.state)
             
         
-red_LED = LED(True,14)
+red_LED = LED(True,17)
 
 
 
