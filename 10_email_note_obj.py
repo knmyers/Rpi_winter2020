@@ -80,7 +80,7 @@ print("Press the button to send the Email")
 while True:
     green()                                 # green LED on
     if GPIO.input(switch_pin) == False:     # button pressed - led red 
-        red()
+        blue()
         send_email(username, password, recipient, subject, message)
         time.sleep(3)
         print("Press the button to send the Email")
