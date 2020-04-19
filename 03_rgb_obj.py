@@ -1,5 +1,5 @@
 #03_rgb.py
-# From the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
+# adapted From the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
 # Based on Recipe 9.9 in The Raspberry Pi Cookbook by Simon Monk.
 
 from tkinter import *       # tkinter provides the graphical user interface (GUI)
@@ -8,6 +8,7 @@ import time
 
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
 GPIO.setmode(GPIO.BCM)
+"used a 'super' class to give my PWM class the same functions as the parent GPIO.PWM class)
 class PWM(GPIO.PWM):
     def __init__(self, id_pin, start_state, maximum, color):
         GPIO.setup(id_pin, GPIO.OUT)
@@ -61,3 +62,4 @@ try:
 finally:  
     print("Cleaning up")
     GPIO.cleanup()
+
