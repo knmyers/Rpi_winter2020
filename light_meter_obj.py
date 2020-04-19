@@ -4,7 +4,7 @@
 from tkinter import *
 import RPi.GPIO as GPIO
 import time, math
-from thermometer_obj import thermometer
+from thermometer_obj import Thermometer
 
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
 GPIO.setmode(GPIO.BCM)
@@ -27,9 +27,8 @@ GPIO.setmode(GPIO.BCM)
 
 # Pin a charges the capacitor through a fixed 1k resistor and the thermistor in series
 # pin b discharges the capacitor through a fixed 1k resistor 
-a_pin = 17
-b_pin = 27
-class Lightmeter(thermometer):
+
+class Lightmeter(Thermometer):
     def __init__(self, a_pin, b_pin):
         super().__init__(a_pin, b_pin)
 # empty the capacitor ready to start filling it up

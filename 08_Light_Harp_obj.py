@@ -10,9 +10,6 @@ GPIO.setmode(GPIO.BCM)
 
 # Pin a charges the capacitor through a fixed 1k resistor and the thermistor in series
 # pin b discharges the capacitor through a fixed 1k resistor 
-a_pin = 17
-b_pin = 27
-buzzer_pin = 22
 
 GPIO.setup(buzzer_pin, GPIO.OUT)
 class LightHarp(ThermometerPlus):
@@ -25,13 +22,19 @@ class LightHarp(ThermometerPlus):
 # Rather misleadingly, this function actually makes the tone on the buzzer
 # by turning it on and off, with a delay caused by charge_time.
 # Cunning or what?
+
     def analog_read(self):
+
         self.discharge()
         GPIO.output(self.buzzer, True)
         self.discharge()
         self.charge_time()
         GPIO.output(self.buzzer, False)
         self.charge_time()
+
+
+light_harp = LightHarp(17,27,22)
+
 
 try:
     while True:

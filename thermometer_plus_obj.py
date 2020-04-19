@@ -46,7 +46,7 @@ GPIO.setmode(GPIO.BCM)
 
 
 
-class ThermometerPlus(thermometer):
+class ThermometerPlus(Thermometer):
     def __init__(self, a_pin, b_pin, buzzer ):
         super().__init__(a_pin, b_pin)
         self.buzzer = buzzer

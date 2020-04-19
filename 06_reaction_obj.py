@@ -14,10 +14,25 @@ red_switch = 22
 green_switch = 10
 
 # LED pins outputs, switch inputs
-GPIO.setup(red_pin, GPIO.OUT)
-GPIO.setup(green_pin, GPIO.OUT)
-GPIO.setup(red_switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(green_switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+
+class ReactionTime:
+    def __init__(self,red_pin, green_pin, red_switch, green_switch):
+        self.red_pin = red_pin
+        self.green_pin = green_pin
+        self.red_switch = red_switch
+        self.green_switch = green_switch
+
+    def setup(self, input, output, on):
+        GPIO.setup(input, GPIO.IN)
+        GPIO.setup(output, GPIO.OUT)
+        GPIO.output(output,on)
+
+    def on_off(self):
+        self.on = input, true
+        self.off = input, false
+
+
 
 # The next three functions turn appropriate LEDs on and off
 def green():
@@ -33,16 +48,19 @@ def off():
     GPIO.output(red_pin, False)
 
 # find which buttons pressed -1 means neither, 0=both, 1=red, 2=green 
-def key_pressed():
-    # if button is pressed GPIO.input will report false for that input
-    if GPIO.input(red_switch) and GPIO.input(green_switch):
-        return 0
-    if not GPIO.input(red_switch) and not GPIO.input(green_switch):
-        return -1
-    if not GPIO.input(red_switch) and GPIO.input(green_switch):
-        return 1
-    if GPIO.input(red_switch) and not GPIO.input(green_switch):
-        return 2
+def key_pressed(self):
+    red = GPIO.input(self.red_switch)
+    green = GPIO.input(self.green_switch)
+
+    if red:
+        if green:
+            return 0  # red and green
+        else:
+            return 1  # Only red
+    elif green:
+        return 2  # Only green
+    else:
+        return -1  # Nothing
 
 try:        
     while True:
