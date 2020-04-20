@@ -4,7 +4,7 @@
 from tkinter import *
 import RPi.GPIO as GPIO
 import time, math
-from thermometer_GUI import Thermometer
+from Thermometer import Thermometer
 
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
 GPIO.setmode(GPIO.BCM)
