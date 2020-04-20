@@ -27,7 +27,7 @@ class LED:
             
         
 red_LED1 = LED(True,17)
-red_LED2 = LED(True,21)
+red_LED2 = LED(False,21)
 
 
 
