@@ -3,7 +3,7 @@
 
 import RPi.GPIO as GPIO
 import time, math
-from thermometer_plus_obj import ThermometerPlus
+from Thermometer_plus import ThermometerPlus
 
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
 GPIO.setmode(GPIO.BCM)
@@ -11,12 +11,11 @@ GPIO.setmode(GPIO.BCM)
 # Pin a charges the capacitor through a fixed 1k resistor and the thermistor in series
 # pin b discharges the capacitor through a fixed 1k resistor 
 
-GPIO.setup(buzzer_pin, GPIO.OUT)
+
 class LightHarp(ThermometerPlus):
     def __init__(self, a_pin, b_pin, buzzer):
         super().__init__(a_pin, b_pin, buzzer)
-
-
+        GPIO.setup(buzzer, GPIO.OUT)
 
 
 # Rather misleadingly, this function actually makes the tone on the buzzer
@@ -24,7 +23,6 @@ class LightHarp(ThermometerPlus):
 # Cunning or what?
 
     def analog_read(self):
-
         self.discharge()
         GPIO.output(self.buzzer, True)
         self.discharge()
@@ -32,13 +30,12 @@ class LightHarp(ThermometerPlus):
         GPIO.output(self.buzzer, False)
         self.charge_time()
 
-
 light_harp = LightHarp(17,27,22)
 
 
 try:
     while True:
-        analog_read()
+        light_harp.analog_read()
 
 finally:  
     print("Cleaning up")
