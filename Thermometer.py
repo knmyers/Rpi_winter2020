@@ -1,4 +1,4 @@
-from tkinter import *           # tkinter provides the graphical user interface (GUI)
+         # tkinter provides the graphical user interface (GUI)
 import RPi.GPIO as GPIO
 import time
 import math
@@ -7,9 +7,9 @@ C = 0.38 # uF - Tweek this value around 0.33 to improve accuracy
 R1 = 1000 # Ohms
 B = 3800.0 # The thermistor constant - change this for a different thermistor
 R_0 = 1000.0 # The resistance of the thermistor at 25C -change for different thermistor
-set_temp = 25
 
-GPIO.setmode(GPIO.BCM)
+
+
 
 class Thermometer:
     def __init__(self, a_pin, b_pin):
