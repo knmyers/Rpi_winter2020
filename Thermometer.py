@@ -3,7 +3,11 @@ import RPi.GPIO as GPIO
 import time
 import math
 
-
+C = 0.38 # uF - Tweek this value around 0.33 to improve accuracy
+R1 = 1000 # Ohms
+B = 3800.0 # The thermistor constant - change this for a different thermistor
+R_0 = 1000.0 # The resistance of the thermistor at 25C -change for different thermistor
+set_temp = 25
 
 GPIO.setmode(GPIO.BCM)
 
@@ -57,6 +61,6 @@ class Thermometer:
         t0 = 273.15     # 0 deg C in K
         t25 = t0 + 25.0 # 25 deg C in K
     # Steinhart-Hart equation - Google it
-        inv_T = 1/t25 + 1/B * math.log(R/float(R0))
+        inv_T = 1/t25 + 1/B * math.log(R/float(R_0))
         T = (1/inv_T - t0)
         return T
