@@ -4,7 +4,7 @@
 from tkinter import *           # tkinter provides the graphical user interface (GUI)
 import RPi.GPIO as GPIO
 import time, math
-from thermometer_GUI import Thermometer
+from Thermometer import Thermometer
 
 
 C = 0.38 # uF - Tweek this value around 0.33 to improve accuracy
@@ -62,6 +62,7 @@ class ThermometerPlus(Thermometer):
             time.sleep(delay)
             GPIO.output(self.buzzer, False)
             time.sleep(delay)
+            
 therm_plus = ThermometerPlus(17,27,22)
 # group together all of the GUI code into a class called App
 class App:
@@ -96,3 +97,4 @@ try:
 finally:  
     print("Cleaning up")
     GPIO.cleanup()
+
