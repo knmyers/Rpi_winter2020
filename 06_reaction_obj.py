@@ -22,7 +22,11 @@ class ReactionTime:
         self.green_pin = output_pin2
         self.red_switch = input_pin1
         self.green_switch = input_pin2
-
+    # LED pins outputs, switch pins inputs
+        GPIO.setup(red_pin, GPIO.OUT)
+        GPIO.setup(green_pin, GPIO.OUT)
+        GPIO.setup(red_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(green_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     def _on(self, pin):
         GPIO.output(pin, True)
@@ -31,17 +35,10 @@ class ReactionTime:
         GPIO.output(pin, False)
 
     # The next three functions turn appropriate LEDs on and off
-    def green(self):
-        self._on(self.green_pin)
-        self._off(self.red_pin)
+    def lights(self,red,green):
+        GPIO.output(self.red, red)
+        GPIO.output(self.green, green)
 
-    def red(self):
-        self._on(self.red_pin)
-        self._off(self.green_pin)
-
-    def off(self):
-        self._off(self.red_pin)
-        self._off (self.green_pin)
 
 # find which buttons pressed -1 means neither, 0=both, 1=red, 2=green 
 def key_pressed(self):
@@ -57,18 +54,18 @@ def key_pressed(self):
         return 2  # Only green
     else:
         return -1  # Nothing
-
+reaction = ReactionTime(17,27,22,10)
 try:        
     while True:
-        off()
+        off() =reaction.lights(False,False)
         print("Press the button for red or green when one lights")
         delay = random.randint(3, 7)    # random delay of 3 to 7 seconds
         color = random.randint(1, 2)    # random color red=1, green=2
         time.sleep(delay)
         if (color == 2):
-            red()
+            red() = reaction.lights(True,False)
         else:
-            green()
+            green() = reaction.lights(True,False)
         t1 = time.time()
         while not key_pressed():
             pass
