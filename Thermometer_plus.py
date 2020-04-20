@@ -65,36 +65,6 @@ class ThermometerPlus(Thermometer):
             
 therm_plus = ThermometerPlus(17,27,22)
 # group together all of the GUI code into a class called App
-class App:
 
-    # this function gets called when the app is created
-    def __init__(self, master):
-        self.master = master
-        frame = Frame(master)
-        frame.pack()
-        label = Label(frame, text='Temp C', font=("Helvetica", 32))
-        label.grid(row=0)
-        self.reading_label = Label(frame, text='12.34', font=("Helvetica", 110))
-        self.reading_label.grid(row=1)
-        self.update_reading()
 
-    # Update the temperature reading
-    def update_reading(self):
-        temp_c = therm_plus.read_temp_c()
-        if temp_c > set_temp:
-            therm_plus.buzz(500, 0.3)
-        reading_str = "{:.2f}".format(temp_c)
-        self.reading_label.configure(text=reading_str)
-        self.master.after(500, self.update_reading)
-
-# Set the GUI running, give the window a title, size and position
-root = Tk()
-root.wm_title('Thermometer')
-app = App(root)
-root.geometry("400x300+0+0")
-try:
-    root.mainloop()
-finally:  
-    print("Cleaning up")
-    GPIO.cleanup()
 
