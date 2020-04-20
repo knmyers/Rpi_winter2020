@@ -86,3 +86,4 @@ try:
 finally:  
     print("Cleaning up")
     GPIO.cleanup()
+
