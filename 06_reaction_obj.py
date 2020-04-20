@@ -1,5 +1,5 @@
 # 06_reactions.py
-# From the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
+# Adapted from the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
 
 import RPi.GPIO as GPIO
 import time, random
@@ -17,35 +17,31 @@ green_switch = 10
 
 
 class ReactionTime:
-    def __init__(self,red_pin, green_pin, red_switch, green_switch):
-        self.red_pin = red_pin
-        self.green_pin = green_pin
-        self.red_switch = red_switch
-        self.green_switch = green_switch
-
-    def setup(self, input, output, on):
-        GPIO.setup(input, GPIO.IN)
-        GPIO.setup(output, GPIO.OUT)
-        GPIO.output(output,on)
-
-    def on_off(self):
-        self.on = input, true
-        self.off = input, false
+    def __init__(self,output_pin1, output_pin2, input_pin1, input_pin2):
+        self.red_pin = output_pin1
+        self.green_pin = output_pin2
+        self.red_switch = input_pin1
+        self.green_switch = input_pin2
 
 
+    def _on(self, pin):
+        GPIO.output(pin, True)
 
-# The next three functions turn appropriate LEDs on and off
-def green():
-    GPIO.output(green_pin, True)
-    GPIO.output(red_pin, False)
+    def _off(self, pin):
+        GPIO.output(pin, False)
 
-def red():
-    GPIO.output(green_pin, False)
-    GPIO.output(red_pin, True)
+    # The next three functions turn appropriate LEDs on and off
+    def green(self):
+        self._on(self.green_pin)
+        self._off(self.red_pin)
 
-def off():
-    GPIO.output(green_pin, False)
-    GPIO.output(red_pin, False)
+    def red(self):
+        self._on(self.red_pin)
+        self._off(self.green_pin)
+
+    def off(self):
+        self._off(self.red_pin)
+        self._off (self.green_pin)
 
 # find which buttons pressed -1 means neither, 0=both, 1=red, 2=green 
 def key_pressed(self):
@@ -77,7 +73,9 @@ try:
         while not key_pressed():
             pass
         t2 = time.time()
-        if key_pressed() != color :   # check the right buton was pressed
+        if key_pressed() == 0 : # if both buttons are pressed,Exit
+            break
+        elif key_pressed() != color :   # check the right buton was pressed
             print("WRONG BUTTON")
         else:
             # display the response time
