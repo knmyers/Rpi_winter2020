@@ -1,3 +1,12 @@
+from tkinter import *           # tkinter provides the graphical user interface (GUI)
+import RPi.GPIO as GPIO
+import time
+import math
+
+
+
+GPIO.setmode(GPIO.BCM)
+
 class Thermometer:
     def __init__(self, a_pin, b_pin):
         self.a_pin = a_pin
